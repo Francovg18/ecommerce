@@ -1,0 +1,48 @@
+import { Link } from "react-router-dom"  
+  export default function ProductsSold({data}) {
+    return (
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 -mt-28">
+        <div className="py-8">
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
+                Productos mas vendidos
+              </h2>
+              <div className="w-full h-2 bg-gray-300 mt-2 relative">
+                <div className="h-full bg-red-500" style={{ width: "25%" }}></div>
+              </div>
+          </div>
+  
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-12 sm:gap-x-6 lg:gap-x-8">
+            {data && 
+            data !== null &&
+            data !== undefined &&
+            data.map((product) => (
+              <div key={product.id} className="group relative">
+                <div className="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
+                  <img
+                    src={product.photo}
+                    alt=""
+                    className="w-full h-full object-center object-cover"
+                  />
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-gray-900">
+                  <Link to={`/product/${product.id}`}>
+                    <span className="absolute inset-0" />
+                    {product.name}
+                  </Link>
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">${product.price}</p>
+              </div>
+            ))}
+          </div>
+  
+          <div className="mt-6 sm:hidden">
+            <Link to="#" className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+              Ver mas productos<span aria-hidden="true"> &rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  

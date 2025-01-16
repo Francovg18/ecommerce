@@ -1,0 +1,137 @@
+import React, { useState, useEffect, useRef } from 'react';
+import Navbar from '../../componentes/navegacion/Navbar';
+import Footer from '../../componentes/navegacion/Footer';
+
+function ContactUs() {
+  const branches = [
+    {
+      title: 'Oficina Central La Paz',
+      address: 'Calle 21',
+      tel: '591-2-2799588 - 2791838 - 2775854',
+      fax: '591-2-2799868',
+      cel: '70596000',
+      email: 'silicom.bolivia@hotmail.com',
+      buttonText: 'Central',
+    },
+    {
+      title: 'Oficina Central Oruro',
+      address: 'Calle 21',
+      tel: '591-2-2799588 - 2791838 - 2775854',
+      fax: '591-2-2799868',
+      cel: '70596000',
+      email: 'silicom.bolivia@hotmail.com',
+      buttonText: 'Central',
+    },
+    {
+      title: 'Oficina Central Cochabamba',
+      address: 'Calle 21',
+      tel: '591-2-2799588 - 2791838 - 2775854',
+      fax: '591-2-2799868',
+      cel: '70596000',
+      email: 'silicom.bolivia@hotmail.com',
+      buttonText: 'Central',
+    },
+    {
+      title: 'Oficina Central Santa Cruz',
+      address: 'Calle 21',
+      tel: '591-2-2799588 - 2791838 - 2775854',
+      fax: '591-2-2799868',
+      cel: '70596000',
+      email: 'silicom.bolivia@hotmail.com',
+      buttonText: 'Central',
+    },
+    {
+      title: 'Oficina Central Tarija',
+      address: 'Calle 21',
+      tel: '591-2-2799588 - 2791838 - 2775854',
+      fax: '591-2-2799868',
+      cel: '70596000',
+      email: 'silicom.bolivia@hotmail.com',
+      buttonText: 'Central',
+    },
+  ];
+
+  const [progressWidth, setProgressWidth] = useState(0);
+  const [maxLength, setMaxLength] = useState(35); // Default maxLength for small screens
+  const headingRef = useRef(null);
+
+  // Update maxLength based on screen size
+  useEffect(() => {
+    const updateMaxLength = () => {
+      const width = window.innerWidth;
+
+      if (width < 480) {
+        setMaxLength(35); // Mobile small
+      } else if (width < 768) {
+        setMaxLength(50); // Mobile large / Small tablets
+      } else if (width < 1024) {
+        setMaxLength(70); // Tablets
+      } else if (width < 1440) {
+        setMaxLength(90); // Laptops
+      } else {
+        setMaxLength(120); // Desktops and larger screens
+      }
+    };
+
+    updateMaxLength(); // Set initial value
+    window.addEventListener('resize', updateMaxLength); // Listen for window resize
+    return () => window.removeEventListener('resize', updateMaxLength); // Cleanup on unmount
+  }, []);
+
+  // Update progressWidth when heading text or maxLength changes
+  useEffect(() => {
+    if (headingRef.current) {
+      const textLength = headingRef.current.textContent.length;
+      const calculatedWidth = Math.min((textLength / maxLength) * 100, 100);
+      setProgressWidth(calculatedWidth);
+    }
+  }, [maxLength]);
+
+  return (
+    <>
+      <Navbar />
+      <div className="px-4 sm:px-16 py-12">
+        <h2
+          ref={headingRef}
+          className="text-2xl font-extrabold tracking-tight text-gray-900 relative inline-block"
+        >
+          Nuestras Sucursales
+        </h2>
+        <div className="w-full bg-gray-200 h-1 mt-1">
+          <div
+            className="bg-red-500 h-1"
+            style={{ width: `${progressWidth}%` }}
+          ></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12 mt-12">
+          {branches.map((branch, index) => (
+            <div
+              key={index}
+              className="border-2 border-red-300 rounded-lg p-4 flex flex-col sm:flex-row items-center sm:items-start gap-4 shadow-lg"
+            >
+              <img
+                src="/path-to-map-image.png"
+                alt={`Mapa de ${branch.address}`}
+                className="w-full sm:w-32 h-32 rounded-md object-cover"
+              />
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg sm:text-xl font-bold">{branch.title}</h3>
+                <p className="text-sm sm:text-base">Telf/Fax: {branch.tel}</p>
+                <p className="text-sm sm:text-base">Fax: {branch.fax}</p>
+                <p className="text-sm sm:text-base">Cel: {branch.cel}</p>
+                <p className="text-sm sm:text-base">Email: {branch.email}</p>
+                <button className="mt-4 px-4 sm:px-6 py-2 bg-red-500 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-red-600">
+                  {branch.buttonText}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+}
+
+export default ContactUs;

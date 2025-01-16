@@ -1,0 +1,393 @@
+import { Fragment, useEffect, useState } from 'react'
+import { Menu, Popover, Transition } from '@headlessui/react'
+import logoGif from '../../assets/img/gif4.webp'
+import logo from '../../assets/img/logoP.jpg'
+import { Link, Navigate, NavLink } from 'react-router-dom'
+import Alert from '../../componentes/alert'
+import logoMini from '../../assets/img/logoMini.jpg'
+
+import {
+  BookmarkAltIcon,
+  BriefcaseIcon,
+  ChartBarIcon,
+  CheckCircleIcon,
+  CursorClickIcon,
+  DesktopComputerIcon,
+  GlobeAltIcon,
+  InformationCircleIcon,
+  MenuIcon,
+  NewspaperIcon,
+  OfficeBuildingIcon,
+  PhoneIcon,
+  PlayIcon,
+  ShieldCheckIcon,
+  UserGroupIcon,
+  ViewGridIcon,
+  XIcon,
+  ShoppingCartIcon,
+  UserIcon
+} from '@heroicons/react/outline'
+import { ChevronDownIcon, LoginIcon, SearchIcon, SortAscendingIcon, UserCircleIcon } from '@heroicons/react/solid'
+
+import { connect } from 'react-redux'
+import { logout } from '../../redux/actions/auth'
+import { get_categories } from '../../redux/actions/categories'
+import { get_search_products } from '../../redux/actions/products'
+import SearchBox from './SearchBox'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+function Navbar({
+  isAuthenticated,
+  user,
+  logout,
+  get_categories,
+  categories,
+  get_search_products,
+  total_items
+}) {
+
+  const [redirect, setRedirect] = useState(false);
+  const [render, setRender] = useState(false);
+  const [formData, setFormData] = useState({
+    category_id: 0,
+    search: ''
+  });
+  const { category_id, search } = formData;
+  useEffect(()=>{
+    get_categories()
+  }, [])
+
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = e => {
+    e.preventDefault();
+    get_search_products(search, category_id);
+    setRender(!render);
+  }
+
+  if(render){
+    return <Navigate to='/search' />
+  }
+
+  const logoutHandler = () => {
+    logout()
+    setRedirect(true);
+  }
+
+  if(redirect){
+    window.location.reload(false);
+    return <Navigate to='/' />
+  }
+
+  const authLinks = (
+    <Menu as="div" className="relative inline-block text-left">
+      <div>
+        <Menu.Button className="inline-flex justify-center w-full rounded-full  text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 ml-3">
+          <span className="inline-block h-10 w-10 rounded-full overflow-hidden bg-gray-100">
+            <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </span>
+        </Menu.Button>
+      </div>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <Link
+                  to="/dashboard"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Info
+                </Link>
+              )}
+            </Menu.Item>
+            
+            
+            <form method="POST" action="#">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={logoutHandler}
+                    className={classNames(
+                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                      'block w-full text-left px-4 py-2 text-sm'
+                    )}
+                  >
+                    Salir
+                  </button>
+                )}
+              </Menu.Item>
+            </form>
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  )
+  const guestLinks = (
+    <Fragment>
+    <div className="hidden md:flex items-center md:ml-7">
+    <Link to="/login" className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center">
+      Log in
+      <UserIcon className="h-5 w-5 ml-2" aria-hidden="true" />
+    </Link>
+      <Link
+        to="/signup"
+        className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-midnight-blue hover:bg-purple-night"
+      >
+        Register
+        <img
+          src={logoGif}
+          alt="Cargando"
+          className="w-7 h-6 mt-0.3 ml-2"
+        />
+      </Link>
+    </div>
+
+    </Fragment>
+  )
+  return (
+    <>
+    <Popover className="relative bg-white ">
+      <div className="absolute inset-0 shadow z-30 pointer-events-none " aria-hidden="true" />
+      <div className="relative z-20">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-3 lg:px-8 md:justify-start md:space-x-10">
+          <div>
+          <Link to="/" className="flex">
+            <img
+              className="h-auto w-32 sm:w-40 md:w-48 lg:w-56"
+              src={logo}
+              alt="Logo"
+            />
+          </Link>
+
+          </div>
+          {/* Contenedor para pantallas pequeñas */}
+          
+          <div className="-mr-2 -my-2 md:hidden">
+          <div className="">
+            {window.location.pathname === '/search' ? null : (
+              <SearchBox 
+                search={search}
+                onChange={onChange}
+                onSubmit={onSubmit}
+                categories={categories}
+              />
+            )}
+          </div>
+          <Link to='/cart' className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+              <span className="sr-only">Open menu</span>
+              <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+          </Link>
+
+            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+              <span className="sr-only">Open menu</span>
+              <MenuIcon className="h-6 w-6" aria-hidden="true" />
+            </Popover.Button>
+          </div>
+          
+
+    {/* Contenedor para pantallas medianas o grandes */}
+    <div className="hidden md:flex-1 md:flex md:items-center md:justify-between">
+      <Popover.Group as="nav" className="flex space-x-10">
+        {window.location.pathname === '/search' ? null : (
+          <div className="flex flex-1 justify-center">
+            <SearchBox 
+              search={search}
+              onChange={onChange}
+              onSubmit={onSubmit}
+              categories={categories}
+            />
+          </div>
+        )}
+      </Popover.Group>
+      <div className="flex items-center md:ml-12">
+        <div className="flex items-center md:ml-12">
+          <Link to="/cart">
+              <ShoppingCartIcon className="h-6 w-6 cursor-pointer text-gray-300 "/>
+              <span className="text-xs absolute top-3 mt-8 ml-4 bg-red-500 text-white font-semibold rounded-full px-2 text-center">{total_items}</span>
+          </Link>
+        </div> 
+        {isAuthenticated ? authLinks:guestLinks}
+      </div>
+    </div>
+
+        </div>
+        <div className="hidden md:flex bg-midnight-blue text-white py-4 px-6 justify-around items-center shadow-lg shadow-blue-800/10">
+          <NavLink
+            to="/"
+            className="text-base font-medium hover:text-gray-300 transition-colors duration-300"
+          >
+            Inicio
+          </NavLink>
+
+          <NavLink
+            to="/"
+            className="text-base font-medium hover:text-gray-300 transition-colors duration-300"
+          >
+            Categoría
+          </NavLink>
+
+          <NavLink
+            to="/shop"
+            className="text-base font-medium hover:text-gray-300 transition-colors duration-300"
+          >
+            Catálogo
+          </NavLink>
+
+          <NavLink
+            to="/"
+            className="text-base font-medium hover:text-gray-300 transition-colors duration-300"
+          >
+            Promociones
+          </NavLink>
+
+          <NavLink
+            to="/"
+            className="text-base font-medium hover:text-gray-300 transition-colors duration-300"
+          >
+            Contáctanos
+          </NavLink>
+
+          <NavLink
+            to="/"
+            className="text-base font-medium hover:text-gray-300 transition-colors duration-300"
+          >
+            ¿Quiénes somos?
+          </NavLink>
+        </div>
+      </div>
+
+      <Transition
+        as={Fragment}
+        enter="duration-200 ease-out"
+        enterFrom="opacity-0 scale-95"
+        enterTo="opacity-100 scale-100"
+        leave="duration-100 ease-in"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-95"
+      >
+        <Popover.Panel
+          focus
+          className="absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+        >
+          <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-midnight-blue text-white divide-y-2 divide-gray-50">
+            <div className="pt-5 pb-6 px-5 sm:pb-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <img className="h-8 w-auto" src={logoMini} alt="Workflow" />
+                </div>
+                <div className="-mr-2">
+                  <Popover.Button className="bg-midnight-blue rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-night">
+                    <span className="sr-only">Cerrar menú</span>
+                    <XIcon className="h-6 w-6" aria-hidden="true" />
+                  </Popover.Button>
+                </div>
+              </div>
+              <div className="mt-6 sm:mt-8">
+                <nav>
+                  <div className="grid gap-7 sm:grid-cols-2 sm:gap-y-8 sm:gap-x-4">
+                    <NavLink
+                      to="/"
+                      className="-m-3 flex items-center p-3 rounded-lg hover:bg-indigo-600"
+                    >
+                      <div className="ml-4 text-base font-medium text-white">
+                        Inicio
+                      </div>
+                    </NavLink>
+                    <NavLink
+                      to="/shop"
+                      className="-m-3 flex items-center p-3 rounded-lg hover:bg-indigo-600"
+                    >
+                      <div className="ml-4 text-base font-medium text-white">
+                        Categoria
+                      </div>
+                    </NavLink>
+                    <NavLink
+                      to="/shop"
+                      className="-m-3 flex items-center p-3 rounded-lg hover:bg-indigo-600"
+                    >
+                      <div className="ml-4 text-base font-medium text-white">
+                        Catálogo
+                      </div>
+                    </NavLink>
+                    <NavLink
+                      to="/"
+                      className="-m-3 flex items-center p-3 rounded-lg hover:bg-indigo-600"
+                    >
+                      <div className="ml-4 text-base font-medium text-white">
+                        Promociones
+                      </div>
+                    </NavLink>
+
+                    <NavLink
+                      to="/"
+                      className="-m-3 flex items-center p-3 rounded-lg hover:bg-indigo-600"
+                    >
+                      <div className="ml-4 text-base font-medium text-white">
+                        Contáctanos
+                      </div>
+                    </NavLink>
+
+                    <NavLink
+                      to="/"
+                      className="-m-3 flex items-center p-3 rounded-lg hover:bg-indigo-600"
+                    >
+                      <div className="ml-4 text-base font-medium text-white">
+                        ¿Quiénes somos?
+                      </div>
+                    </NavLink>              
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div className="py-6 px-5 bg-gray-50">
+              <div className="grid grid-cols-2 gap-4 bg-gray-50">
+                <Link
+                  to="/login"
+                  className="text-sm font-medium text-midnight-blue hover:text-purple-night hover:underline text-center"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="text-sm font-medium text-midnight-blue hover:text-purple-night hover:underline text-center"
+                >
+                  Registrarse
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Popover.Panel>
+      </Transition>
+    </Popover>
+    <Alert/>
+    </>
+  )
+}
+const mapStateToProps = state =>  ({
+  isAuthenticated: state.Auth.isAuthenticated,
+  user: state.Auth.user,
+  categories: state.Categories.categories,
+  total_items: state.Cart.total_items
+})
+export default connect(mapStateToProps, {
+  logout,
+  get_categories,
+  get_search_products
+}) (Navbar)
