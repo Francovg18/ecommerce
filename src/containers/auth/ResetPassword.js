@@ -36,11 +36,12 @@ const ResetPassword = ({
   return (
     <Layout>
       <div className="min-h-full flex justify-center py-12 sm:px-6 lg:px-8">
-        <div className="flex bg-white shadow-lg border border-gray-300 sm:rounded-lg w-[45%] max-w-[80%]">
-          <div className="w-[20%] bg-gradient-to-r from-crimson-red via-deep-rose via-dark-burgundy via-royal-purple to-midnight-blue rounded-l-lg rounded-tr-[18px] rounded-br-[18px]"></div>
+        <div className="flex bg-white shadow-lg border border-gray-300 sm:rounded-lg w-full max-w-lg sm:max-w-md">
+          {/* Gradiente solo en pantallas grandes */}
+          <div className="w-[30%] bg-gradient-to-r from-crimson-red via-deep-rose via-dark-burgundy via-royal-purple to-midnight-blue rounded-l-lg rounded-tr-[18px] hidden sm:block"></div>
 
-          <div className="w-[80%] sm:mx-auto sm:w-full sm:max-w-[70%] px-0 py-4">
-            <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">Recuperar contraseña</h2>
+          <div className="w-full sm:max-w-[100%] px-4 py-6 sm:py-8">
+            <h2 className="mt-2 text-center text-2xl sm:text-3xl font-extrabold text-gray-900">Recuperar contraseña</h2>
 
             <div className="mt-3 sm:mx-auto sm:w-full">
               <div className="py-8 px-3">
@@ -80,8 +81,6 @@ const ResetPassword = ({
         </div>
       </div>
     </Layout>
-
-    
   );
 };
 

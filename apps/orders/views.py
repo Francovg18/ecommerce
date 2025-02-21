@@ -51,7 +51,6 @@ class ListOrderDetailView(APIView):
                 result['city'] = order.city
                 result['state_province_region'] = order.state_province_region
                 result['postal_zip_code'] = order.postal_zip_code
-                result['country_region'] = order.country_region
                 result['telephone_number'] = order.telephone_number
                 result['shipping_name'] = order.shipping_name
                 result['shipping_time'] = order.shipping_time

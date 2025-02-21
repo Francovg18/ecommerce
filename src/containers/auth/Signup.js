@@ -49,63 +49,62 @@ const Signup = ({ signup }) => {
 
   return (
     <Layout>
-  <div className="min-h-full flex justify-center items-center py-8 px-4 sm:px-6 lg:px-8">
-    <div className="flex bg-white shadow-md border border-gray-200 rounded-lg w-full max-w-lg">
-    <div className="w-[23%] bg-gradient-to-r from-crimson-red via-deep-rose via-dark-burgundy via-royal-purple to-midnight-blue rounded-l-lg rounded-tr-[18px] rounded-br-[18px]"></div>
+      <div className="min-h-full flex justify-center items-center py-8 px-4 sm:px-6 lg:px-8">
+        <div className="flex bg-white shadow-md border border-gray-200 rounded-lg w-[80%] sm:w-[60%] md:w-[50%] lg:w-[40%]">
+          <div className="w-[23%] bg-gradient-to-r from-crimson-red via-deep-rose via-dark-burgundy via-royal-purple to-midnight-blue rounded-l-lg rounded-tr-[18px] rounded-br-[18px] hidden sm:block"></div>
 
-      <div className="px-6 py-8 flex-1">
-        <h2 className="text-2xl font-bold text-center text-gray-900">Crear cuenta</h2>
-        <form onSubmit={onSubmit} className="space-y-5 mt-5">
-          <InputField
-            label="Nombre"
-            name="first_name"
-            value={first_name}
-            onChange={onChange}
-            error={errors.first_name}
-          />
-          <InputField
-            label="Apellido"
-            name="last_name"
-            value={last_name}
-            onChange={onChange}
-            error={errors.last_name}
-          />
-          <InputField
-            label="Correo"
-            name="email"
-            type="email"
-            value={email}
-            onChange={onChange}
-            error={errors.email}
-          />
-          <InputField
-            label="Contraseña"
-            name="password"
-            type="password"
-            value={password}
-            onChange={onChange}
-            error={errors.password}
-          />
-          <InputField
-            label="Confirmar contraseña"
-            name="re_password"
-            type="password"
-            value={re_password}
-            onChange={onChange}
-            error={errors.re_password}
-          />
-          <button
-            type="submit"
-            className="w-full bg-midnight-blue hover:bg-purple-night text-white py-2 px-4 rounded-md shadow-md focus:outline-none"
-          >
-            Registrarse
-          </button>
-        </form>
+          <div className="px-6 py-8 flex-1">
+            <h2 className="text-2xl font-bold text-center text-gray-900">Crear cuenta</h2>
+            <form onSubmit={onSubmit} className="space-y-5 mt-5">
+              <InputField
+                label="Nombre"
+                name="first_name"
+                value={first_name}
+                onChange={onChange}
+                error={errors.first_name}
+              />
+              <InputField
+                label="Apellido"
+                name="last_name"
+                value={last_name}
+                onChange={onChange}
+                error={errors.last_name}
+              />
+              <InputField
+                label="Correo"
+                name="email"
+                type="email"
+                value={email}
+                onChange={onChange}
+                error={errors.email}
+              />
+              <InputField
+                label="Contraseña"
+                name="password"
+                type="password"
+                value={password}
+                onChange={onChange}
+                error={errors.password}
+              />
+              <InputField
+                label="Confirmar contraseña"
+                name="re_password"
+                type="password"
+                value={re_password}
+                onChange={onChange}
+                error={errors.re_password}
+              />
+              <button
+                type="submit"
+                className="w-full bg-midnight-blue hover:bg-purple-night text-white py-2 px-4 rounded-md shadow-md focus:outline-none"
+              >
+                Registrarse
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</Layout>
-
+    </Layout>
   )
 }
 
@@ -128,6 +127,6 @@ const InputField = ({ label, name, type = 'text', value, onChange, error }) => (
   </div>
 )
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({})
 
-export default connect(mapStateToProps, { signup })(Signup);
+export default connect(mapStateToProps, { signup })(Signup)

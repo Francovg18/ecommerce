@@ -25,8 +25,30 @@ const Banner = ({ data = [] }) => {
   }, [data]);
 
   if (!Array.isArray(data) || data.length === 0) {
-    return <div>No hay productos disponibles para mostrar.</div>;
+    return (
+      <div className="flex justify-center items-center h-[300px] p-8 bg-gray-100 rounded-lg border border-gray-200 shadow-lg">
+        <div className="text-center">
+          <p className="text-xl font-semibold text-gray-600 mb-4">
+            ¡Ups! No hay productos disponibles en este momento.
+          </p>
+          <p className="text-md text-gray-500 mb-6">
+            Estamos actualizando nuestra tienda. ¡Vuelve pronto para descubrir novedades!
+          </p>
+          <div className="mt-4">
+            <Link
+              to="/"
+              className="inline-block px-6 py-3 bg-midnight-blue text-white rounded-md shadow-md hover:bg-purple-night transition"
+            >
+              Regresar al inicio
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
+  
+  
+  
 
   const visibleProducts = [
     ...data.slice(visibleIndex, visibleIndex + productsToShow),

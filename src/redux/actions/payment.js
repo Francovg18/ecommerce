@@ -13,17 +13,20 @@ import {
     REMOVE_PAYMENT_LOADING
 } from './types';
 
-
+// Obtener total del pago (GET)
 export const get_payment_total = (shipping_id, coupon_name) => async dispatch => {
     const config = {
         headers: {
             'Accept': 'application/json',
-            'Authorization': `JWT ${localStorage.getItem('access')}`
+            'Authorization': `JWT ${localStorage.getItem('access')}` 
         }
     };
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/payment/get-payment-total?shipping_id=${shipping_id}&coupon_name=${coupon_name}`, config);
+        const res = await axios.get(
+            `${process.env.REACT_APP_API_URL}/api/payment/get-payment-total?shipping_id=${shipping_id}&coupon_name=${coupon_name}`,
+            config
+        );
 
         if (res.status === 200 && !res.data.error) {
             dispatch({
@@ -35,13 +38,14 @@ export const get_payment_total = (shipping_id, coupon_name) => async dispatch =>
                 type: GET_PAYMENT_TOTAL_FAIL
             });
         }
-    } catch(err) {
+    } catch (err) {
         dispatch({
             type: GET_PAYMENT_TOTAL_FAIL
         });
     }
 }
 
+// Obtener el token de cliente de Braintree (GET)
 export const get_client_token = () => async dispatch => {
     const config = {
         headers: {
@@ -63,13 +67,14 @@ export const get_client_token = () => async dispatch => {
                 type: LOAD_BT_TOKEN_FAIL
             });
         }
-    } catch(err) {
+    } catch (err) {
         dispatch({
             type: LOAD_BT_TOKEN_FAIL
         });
     }
 }
 
+// Procesar el pago (POST)
 export const process_payment = (
     nonce,
     shipping_id,
@@ -80,7 +85,6 @@ export const process_payment = (
     city,
     state_province_region,
     postal_zip_code,
-    country_region,
     telephone_number
 ) => async dispatch => {
     const config = {
@@ -101,7 +105,6 @@ export const process_payment = (
         city,
         state_province_region,
         postal_zip_code,
-        country_region,
         telephone_number
     });
 
@@ -111,31 +114,34 @@ export const process_payment = (
 
     try {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/payment/make-payment`, body, config);
+
         if (res.status === 200 && res.data.success) {
             dispatch({
                 type: PAYMENT_SUCCESS
             });
             dispatch(setAlert(res.data.success, 'green'));
-            dispatch(get_item_total());
+            dispatch(get_item_total()); 
         } else {
             dispatch({
                 type: PAYMENT_FAIL
             });
             dispatch(setAlert(res.data.error, 'red'));
         }
-    } catch(err) {
+    } catch (err) {
         dispatch({
             type: PAYMENT_FAIL
         });
-        dispatch(setAlert('Error processing payment', 'red'));
+        dispatch(setAlert('Error processing payment', 'red'));  // Mensaje genérico si falla el procesamiento
     }
 
     dispatch({
         type: REMOVE_PAYMENT_LOADING
     });
-    window.scrollTo(0, 0);
+
+    window.scrollTo(0, 0);  
 }
 
+// Resetear la información de pago
 export const reset = () => dispatch => {
     dispatch({
         type: RESET_PAYMENT_INFO

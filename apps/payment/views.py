@@ -149,9 +149,7 @@ class ProcessPaymentView(APIView):
     def post(self, request, format=None):
         user = self.request.user
         data = self.request.data
-
         tax = 0.18
-
         nonce = data['nonce']
         shipping_id = str(data['shipping_id'])
         coupon_name = str(data['coupon_name'])
@@ -161,15 +159,18 @@ class ProcessPaymentView(APIView):
         address_line_2 = data['address_line_2']
         city = data['city']
         state_province_region = data['state_province_region']
-        postal_zip_code = data['postal_zip_code']
-        country_region = data['country_region']
         telephone_number = data['telephone_number']
+        postal_zip_code = data['postal_zip_code']
+        
 
         # revisar si datos de shipping son validos
         if not Shipping.objects.filter(id__iexact=shipping_id).exists():
+            print(Shipping.objects.all()) 
+            print('Error valifo')
             return Response(
                 {'error': 'Invalid shipping option'},
                 status=status.HTTP_404_NOT_FOUND
+                
             )
         
         cart = Cart.objects.get(user=user)
@@ -280,7 +281,6 @@ class ProcessPaymentView(APIView):
                     city=city,
                     state_province_region=state_province_region,
                     postal_zip_code=postal_zip_code,
-                    country_region=country_region,
                     telephone_number=telephone_number,
                     shipping_name=shipping_name,
                     shipping_time=shipping_time,

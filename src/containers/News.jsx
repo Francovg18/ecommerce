@@ -5,13 +5,14 @@ import {
 } from '../redux/actions/products';
 import { useEffect } from "react";
 import NewsProducts from "./pages/NewsProducts";
+
 const Home = ({ get_products_by_arrival, products_arrival
 }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
         get_products_by_arrival();
-    }, []);
+    }, [get_products_by_arrival]);
 
     return (
         <Layout>

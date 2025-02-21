@@ -61,9 +61,22 @@ const NewsProducts = ({ data, isAuthenticated }) => {
               
             ))
           ) : (
-            <p className="text-gray-600 text-center text-lg">
-              No hay productos disponibles.
-            </p>
+            <div className="col-span-4 text-center py-16 px-4 bg-gray-200 rounded-lg shadow-lg">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                Actualmente no hay productos disponibles.
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Estamos trabajando para traer nuevos productos. ¡Vuelve pronto!
+              </p>
+              <div className="mt-4">
+                <Link
+                  to="/"
+                  className="inline-block px-6 py-3 bg-midnight-blue text-white rounded-md shadow-lg hover:bg-purple-night transition"
+                >
+                  Regresar al inicio
+                </Link>
+              </div>
+            </div>
           )}
         </div>
       </div>
