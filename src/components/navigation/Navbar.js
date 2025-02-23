@@ -391,7 +391,7 @@ function Navbar({
           Sobre nosotros
         </NavLink>
         <NavLink
-          to="/customer-info"
+          to="/user_register"
           className="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded-b-lg"
         >
           ¿Cómo ser un cliente?

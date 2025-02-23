@@ -188,9 +188,16 @@ function Contacto() {
                           className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-midnight-blue focus:border-midnight-blue sm:text-sm rounded-md"
                         >
                           <option value="" disabled>Ciudad</option>
-                          <option value="0-5,000">La Paz</option>
-                          <option value="5,000-10,000">Santa Cruz</option>
-                          <option value="10,000+">Oruro</option>
+                          <option value="La Paz">La Paz</option>
+                          <option value="Santa Cruz">Santa Cruz</option>
+                          <option value="Cochabamba">Cochabamba</option>
+                          <option value="Oruro">Oruro</option>
+                          <option value="Potosí">Potosí</option>
+                          <option value="Chuquisaca">Sucre</option>
+                          <option value="Tarija">Tarija</option>
+                          <option value="Beni">Trinidad</option>
+                          <option value="Pando">Cobija</option>
+
                         </select>
                       </div>
 

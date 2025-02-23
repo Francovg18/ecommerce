@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/reviews/', include('apps.reviews.urls')), 
     path('api/brand/', include('apps.brand.urls')), 
     path('api/contacts/', include('apps.contacts.urls')), 
+    path('api/user_register/', include('apps.user_register.urls')), 
 
     # Ruta del panel de administración de Django
     path('admin/', admin.site.urls),

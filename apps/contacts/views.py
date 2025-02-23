@@ -31,8 +31,8 @@ class ContactCreateView(APIView):
             send_mail(
                 subject,
                 f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage:\n{message}\nBudget: {budget}",
-                'admin@gmail.com',
-                ['admin@gmail.com'],
+                'alefrvg@gmail.com',
+                ['alefrvg@gmail.com'],
                 fail_silently=False
             )
 
@@ -95,7 +95,7 @@ class ContactCreateView(APIView):
 
 
 class EbookSubscriptionView(APIView):
-    permission_classes = [permissions.AllowAny]  # Permitir acceso sin autenticación
+    permission_classes = [permissions.AllowAny]  
 
     def post(self, request, format=None):
         data = request.data

@@ -28,6 +28,7 @@ import Help from './containers/Help.jsx';
 import Products from './containers/pages/products/Products.jsx';
 import News from './containers/News';
 import Brands from './containers/Brands';
+import UserRegister from './containers/pages/contact/UserRegister.jsx';
 import Contacto from './containers/pages/contact/Contacto.jsx';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -69,6 +70,7 @@ function App() {
           <Route exact path='/news' element={<News/>}/>
           <Route exact path='/brands' element={<Brands/>}/>
           <Route exact path='/contacto' element={<Contacto/>}/>
+          <Route exact path='/user_register' element={<UserRegister/>}/>
 
 
         </Routes>
