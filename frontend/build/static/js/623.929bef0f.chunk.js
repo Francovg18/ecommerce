@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkecommerce=self.webpackChunkecommerce||[]).push([[623],{6004:(e,l,a)=>{a.r(l),a.d(l,{default:()=>c});a(5043);var r=a(579);const c=e=>{let{mapUrl:l}=e;return(0,r.jsx)("iframe",{src:l,className:"w-full h-40 rounded-lg",loading:"lazy",title:"Map"})}}}]);
+//# sourceMappingURL=623.929bef0f.chunk.js.map
