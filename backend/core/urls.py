@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/qr_payment/', include('apps.qr_payment.urls')),
     path('api/branches/', include('apps.branches.urls')),
     path('api/ml/', include('apps.ml.urls')),
+    path('api/emotionstate/', include('apps.emotion_state.urls')),
 
     path('admin/', admin.site.urls),
 ]

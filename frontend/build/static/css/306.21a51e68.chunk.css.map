@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/306.21a51e68.chunk.css","mappings":"AAAA,cACE,UAAc,CACd,cACF","sources":["style/rating_stars.css"],"sourcesContent":[".rating_stars {\r\n  color: #ffd700;\r\n  font-size: 18px;\r\n}\r\n"],"names":[],"sourceRoot":""}

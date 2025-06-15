@@ -39,7 +39,7 @@ PROJECT_APPS = ['apps.user', 'apps.user_profile',
                 'apps.contacts', 'apps.user_register']
 ECOMMERCE_APPS = ['apps.category', 'apps.product',
                   'apps.cart', 'apps.shipping', 'apps.orders', 'apps.payment', 'apps.coupons', 'apps.wishlist',
-                  'apps.reviews', 'apps.qr_payment', 'apps.brand', 'apps.branches', 'apps.ml'
+                  'apps.reviews', 'apps.qr_payment', 'apps.brand', 'apps.branches', 'apps.ml', 'apps.emotion_state',
                   ]
 THIRD_PARTY_APPS = [
     'corsheaders',

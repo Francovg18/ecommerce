@@ -1,11 +1,12 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import Resultado from "./containers/ai/Resultado";
 import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import InstallButton from "./InstallButton";
+import FormAI from "./containers/ai/FormAI";
 // 🔁 Lazy imports
 const Home = lazy(() => import('./containers/Home'));
 const Error404 = lazy(() => import('./containers/errors/Error404'));
@@ -80,6 +81,10 @@ function App() {
 
             {/* ai */}
             <Route path="/ai/sentiment-analysis" element={<SentimentAnalysis />} />
+            <Route path="/f" element={<FormAI />} />
+            <Route path="/resultado-emocion" element={<Resultado />} />
+
+
           </Routes>
         </Suspense>
       </Router>
