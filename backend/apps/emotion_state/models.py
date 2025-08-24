@@ -3,7 +3,7 @@ from django.conf import settings
 
 class EmotionAnalysis(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    respuestas = models.JSONField()  # Guarda las 15 respuestas tipo Likert
+    respuestas = models.JSONField()  
     resultado = models.CharField(max_length=50)
     fecha = models.DateTimeField(auto_now_add=True)
 
