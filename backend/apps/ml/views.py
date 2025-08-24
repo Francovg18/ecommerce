@@ -159,7 +159,6 @@ class SentimentPredictView(APIView):
             ])
 
             pred = modelo_rf.predict(X_final)[0]
-            # 🔍 Aumentar faltas si es agresivo
             if pred == "Agresivo":
                 request.user.faltas_agresivas += 1
                 if request.user.faltas_agresivas >= 3:
