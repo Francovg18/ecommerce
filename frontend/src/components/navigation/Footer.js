@@ -1,6 +1,7 @@
 import React from "react";
-import { MapIcon, PhoneIcon, MailIcon, ChatAltIcon, GlobeAltIcon, ShoppingBagIcon, UserGroupIcon } from "@heroicons/react/solid";
+import { MapIcon, PhoneIcon, MailIcon, ChatAltIcon, GlobeAltIcon, ShoppingBagIcon, UserGroupIcon, QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import logoPng from '../../assets/img/logoPng.png';
 
 function Footer() {
   return (
@@ -8,31 +9,20 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
           <div className="mb-6 md:mb-0">
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-200 to-blue-100 bg-clip-text text-transparent">Silicom</h2>
+            <img className="h-auto w-52 sm:w-52 md:w-48 lg:w-52 -ml-2" src={logoPng} alt="LogoPng" />
             <p className="text-sm text-indigo-300 mt-1">Sin Límite en comunicación y comercialización</p>
           </div>
           
           <div className="flex space-x-6">
-            <Link to='' className="w-10 h-10 rounded-full bg-gray-800 hover:bg-indigo-600 flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-              <i className="fab fa-facebook-f text-xl"></i>
-            </Link>
-            <Link to='' className="w-10 h-10 rounded-full bg-gray-800 hover:bg-indigo-600 flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-              <i className="fab fa-twitter text-xl"></i>
-            </Link>
-            <Link to='' className="w-10 h-10 rounded-full bg-gray-800 hover:bg-indigo-600 flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-              <i className="fab fa-instagram text-xl"></i>
-            </Link>
-            <Link to='' className="w-10 h-10 rounded-full bg-gray-800 hover:bg-indigo-600 flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-              <i className="fab fa-linkedin-in text-xl"></i>
-            </Link>
-          </div>
+
         </div>
+      </div>
         
         <div className="relative h-0.5 w-full bg-gray-800 mb-12 overflow-hidden">
           <div className="absolute w-1/3 h-full bg-gradient-to-r from-crimson-red to-red-500 animate-pulse"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-10">
           {/* Información silicom */}
           <div>
             <h3 className="text-l font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-1 after:w-12 after:bg-red-500 after:rounded-full">Nosotros</h3>
@@ -54,13 +44,13 @@ function Footer() {
 
           <div>
             <h3 className="text-l font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-1 after:w-12 after:bg-red-500 after:rounded-full">Enlaces</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {[
+                {text: "Iniciar Sesion", link: "/login"},
+                {text: "Catalogo", link: "/products"},
                 {text: "Sobre Nosotros", link: "/about"},
+                {text: "Únete a nosotros", link: "/user_register"},
                 {text: "Ayuda & Soporte", link: "/help"},
-                {text: "Contacto", link: "/contactus"},
-                {text: "Tienda", link: "/shop"},
-                {text: "Términos y Condiciones", link: "/terms"}
               ].map((item, index) => (
                 <li key={index}>
                   <a href={item.link} className="group flex items-center">
@@ -74,79 +64,105 @@ function Footer() {
 
           {/* Contacto */}
           <div>
-            <h3 className="text-l font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-1 after:w-12 after:bg-red-500 after:rounded-full">Contacto</h3>
+            <h3 className="text-l font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-1 after:w-12 after:bg-red-500 after:rounded-full">
+              Contacto y Soporte
+            </h3>
             <ul className="space-y-4">
-            <li className="flex items-start">
-              <a
-                href="https://wa.me/59164163930?text=Hola,%20tengo%20una%20consulta..."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-green-500 mr-3 mt-1 hover:bg-green-600 transition"
-              >
-                <ChatAltIcon className="w-5 h-5 text-white" />
-              </a>
-              <div>
-                <p className="text-sm text-gray-400">WhatsApp</p>
-                <p>78945612</p>
-              </div>
-            </li>
-
-            <li className="flex items-start">
-              <a
-                href="mailto:alefrvg@gmail.com?subject=Consulta&body=Hola,%20tengo%20una%20consulta..."
-                className="p-2 rounded-full bg-blue-500 text-white mr-3 mt-1"
-              >
-                <MailIcon className="w-5 h-5" />
-              </a>
-              <div>
-                <p className="text-sm text-gray-400">Correo Electrónico</p>
-                <p>silicom@empresa.com</p>
-              </div>
-            </li>
 
               <li className="flex items-start">
-                <div className="p-2 rounded-full bg-red-600 mr-3 mt-1">
-                  <MapIcon className="w-5 h-5 red-400" />
-                </div>
+                <a
+                  href="/contacto"
+                  className="p-2 rounded-full bg-blue-500 text-white mr-3 mt-1 hover:bg-blue-600 transition"
+                >
+                  <MailIcon className="w-5 h-5" />
+                </a>
                 <div>
-                  <p className="text-sm text-gray-400">Dirección</p>
-                  <p>Calle Comercio, La Paz, Bolivia</p>
+                  <p className="text-sm text-gray-400">Formulario en línea</p>
+                  <p>Envíanos tus consultas de manera rápida.</p>
+                </div>
+              </li>
+
+              <li className="flex items-start">
+                <a
+                  href="/contactus"
+                  className="p-2 rounded-full bg-red-600 text-white mr-3 mt-1 hover:bg-red-700 transition"
+                >
+                  <MapIcon className="w-5 h-5" />
+                </a>
+                <div>
+                  <p className="text-sm text-gray-400">Nuestras Sucursales</p>
+                  <p>Consulta todas nuestras ubicaciones en Bolivia.</p>
+                </div>
+              </li>
+
+              <li className="flex items-start">
+                <a
+                  href="/help"
+                  className="p-2 rounded-full bg-green-600 text-white mr-3 mt-1 hover:bg-green-700 transition"
+                >
+                  <QuestionMarkCircleIcon className="w-5 h-5" />
+                </a>
+                <div>
+                  <p className="text-sm text-gray-400">Centro de Ayuda</p>
+                  <p>Respuestas sobre el uso de la página.</p>
                 </div>
               </li>
             </ul>
           </div>
 
-          {/* Soporte */}
           <div>
-            <h3 className="text-l font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-1 after:w-12 after:bg-red-500 after:rounded-full">Soporte</h3>
-            <p className="text-gray-400 mb-4">Contactanos a nuestro soporte tecnico</p>
+          <h3 className="text-l font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-1 after:w-12 after:bg-red-500 after:rounded-full">
+            Redes
+          </h3>
 
-              <li className="flex items-start">
-                <div className="p-2 rounded-full bg-green-800 mr-3 mt-1">
-                  <PhoneIcon className="w-5 h-5 red-400" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Teléfono</p>
-                  <p>800-123-456</p>
-                </div>
-              </li>
-            <p className="text-gray-500 text-xs mt-3">
-              Nos importa tu privacidad. No compartiremos tu información con terceros.
-            </p>
-          </div>
+          <ul className="space-y-3 text-sm text-gray-300">
+            <li className="flex items-center space-x-3 hover:text-white transition-all duration-300">
+              <a
+                href="https://www.facebook.com/commaxbolivia?rdid=4CZRhmQCOTlbNnOT"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Facebook SILICOM Santa Cruz"
+                className="w-10 h-10 rounded-full bg-gray-800 hover:bg-indigo-600 flex items-center justify-center transition-all duration-300"
+              >
+                <i className="fab fa-facebook-f text-xl"></i>
+              </a>
+              <span>Silicom Santa Cruz</span>
+            </li>
+
+            <li className="flex items-center space-x-3 hover:text-white transition-all duration-300">
+              <a
+                href="https://www.facebook.com/silicombol?rdid=CsHTVd6UNSfiHI5g"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Facebook SILICOM Bolivia"
+                className="w-10 h-10 rounded-full bg-gray-800 hover:bg-indigo-600 flex items-center justify-center transition-all duration-300"
+              >
+                <i className="fab fa-facebook-f text-xl"></i>
+              </a>
+              <span>Silicom La Paz</span>
+            </li>
+          </ul>
+
+          <hr className="my-6 border-gray-600" />
+
+          <h3 className="text-l font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-1 after:w-12 after:bg-red-500 after:rounded-full">
+            Pagos
+          </h3>
+
+          <ul className="space-y-3 text-sm text-gray-300">
+            <li className="flex items-center space-x-3">
+              <span className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800">
+                <i className="fas fa-qrcode text-xl text-green-400"></i>
+              </span>
+              <span>Vía QR</span>
+            </li>
+          </ul>
+        </div>
+
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <p className="text-gray-400">Copyright &copy; {new Date().getFullYear()} <span className="red-400">Silicom</span> - Sin límite en comunicación y comercialización. All Rights Reserved.</p> 
-          <div className="flex justify-center mt-4 space-x-6 text-gray-500 text-sm">
-            <Link to="/privacy" className="hover:red-400 transition">Privacidad</Link>
-            <Link to="/terms" className="hover:red-400 transition">Términos</Link>
-            <Link to="/cookies" className="hover:red-400 transition">Cookies</Link>
-            <Link to="/sitemap" className="hover:red-400 transition">Mapa del sitio</Link>
-            <Link to="/signup" className="text-base font-medium text-gray-500 hover:text-gray-900 flex items-center">
-              Log in
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
